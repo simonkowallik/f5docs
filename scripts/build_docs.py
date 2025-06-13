@@ -115,7 +115,8 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-html_theme = 'basic'
+html_theme = 'shibuya'
+#html_theme = 'basic'
 html_title = project
 html_short_title = project
 html_show_sourcelink = False
