@@ -3,8 +3,6 @@ name: Build and Deploy Documentation
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   schedule:
     # Run daily at 2 AM UTC to fetch latest documentation
     - cron: '0 2 * * *'

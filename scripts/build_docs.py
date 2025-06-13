@@ -14,7 +14,6 @@ import logging
 from pathlib import Path
 from typing import Dict, List, Any
 import git
-from bs4 import BeautifulSoup
 import re
 
 # Configure logging
@@ -90,52 +89,22 @@ class DocumentationBuilder:
         # Copy documentation files
         for item in doc_path.iterdir():
             if item.is_file():
-                if item.suffix in ['.rst', '.md', '.txt', '.py']:
+                if item.suffix in ['.rst', '.md', '.txt']:
                     shutil.copy2(item, target_path)
             elif item.is_dir() and item.name not in ['_build', '__pycache__']:
                 shutil.copytree(item, target_path / item.name, dirs_exist_ok=True)
                 
         # Create or modify conf.py to disable themes
-        conf_path = target_path / 'conf.py'
-        if conf_path.exists():
-            self.neutralize_sphinx_theme(conf_path)
-        else:
-            self.create_basic_conf(conf_path, repo_name)
+        self.create_basic_conf(conf_path, repo_name)
             
         return target_path
-        
-    def neutralize_sphinx_theme(self, conf_path: Path):
-        """Remove theme-specific configurations from conf.py"""
-        logger.info(f"Neutralizing theme in {conf_path}")
-        
-        with open(conf_path, 'r') as f:
-            content = f.read()
-            
-        # Remove theme-related configurations
-        content = re.sub(r"html_theme\s*=\s*['\"].*?['\"]", "html_theme = 'basic'", content)
-        content = re.sub(r"html_theme_options\s*=\s*{.*?}", "", content, flags=re.DOTALL)
-        content = re.sub(r"html_theme_path\s*=\s*\[.*?\]", "", content, flags=re.DOTALL)
-        
-        # Add basic configuration
-        content += "\n\n# Aggregated documentation settings\n"
-        content += "html_theme = 'basic'\n"
-        content += "html_title = project\n"
-        content += "html_short_title = project\n"
-        content += "html_show_sourcelink = False\n"
-        content += "html_show_sphinx = False\n"
-        content += "html_show_copyright = True\n"
-        
-        with open(conf_path, 'w') as f:
-            f.write(content)
-            
+           
     def create_basic_conf(self, conf_path: Path, repo_name: str):
         """Create a basic conf.py file"""
         logger.info(f"Creating basic conf.py for {repo_name}")
         
         conf_content = f"""# Configuration file for {repo_name}
 project = '{repo_name}'
-copyright = '2024'
-author = 'Documentation Team'
 
 extensions = [
     'sphinx.ext.autodoc',
