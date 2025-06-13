@@ -78,6 +78,14 @@ class DocumentationBuilder:
             
         return doc_path
         
+    def preprocess_file_content(self, content: str) -> str:
+        """Remove specific unwanted links from file content."""
+        # URL to remove, ensure it's properly escaped for regex if needed,
+        # though for a simple string replacement, direct replacement is fine.
+        # For more complex patterns, re.sub would be better.
+        url_to_remove = "https://clouddocs.f5.com/training/community/rseries-training/html/"
+        return content.replace(url_to_remove, "")
+
     def process_sphinx_docs(self, doc_path: Path, repo_name: str) -> Path:
         """Process Sphinx documentation and return processed path"""
         logger.info(f"Processing Sphinx documentation for {repo_name}")
@@ -89,7 +97,14 @@ class DocumentationBuilder:
         # Copy documentation files
         for item in doc_path.iterdir():
             if item.is_file():
-                if item.suffix in ['.rst', '.md', '.txt']:
+                if item.suffix in ['.rst', '.md']:
+                    # Read, preprocess, and write
+                    with open(item, 'r', encoding='utf-8', errors='ignore') as f_in:
+                        content = f_in.read()
+                    processed_content = self.preprocess_file_content(content)
+                    with open(target_path / item.name, 'w', encoding='utf-8') as f_out:
+                        f_out.write(processed_content)
+                elif item.suffix in ['.txt']: # Keep .txt files as is for now
                     shutil.copy2(item, target_path)
             elif item.is_dir() and item.name not in ['_build', '__pycache__']:
                 shutil.copytree(item, target_path / item.name, dirs_exist_ok=True)
