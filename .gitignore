@@ -1,1 +1,5 @@
 f5-rseries-training/
+.venv/
+_build/
+_source/
+_temp/

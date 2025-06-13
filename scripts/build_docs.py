@@ -95,8 +95,8 @@ class DocumentationBuilder:
                 shutil.copytree(item, target_path / item.name, dirs_exist_ok=True)
                 
         # Create or modify conf.py to disable themes
-        self.create_basic_conf(conf_path, repo_name)
-            
+        self.create_basic_conf(f"{target_path}/conf.py", repo_name)
+
         return target_path
            
     def create_basic_conf(self, conf_path: Path, repo_name: str):
