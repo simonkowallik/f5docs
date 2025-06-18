@@ -136,13 +136,10 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = 'shibuya'
-#html_theme = 'basic'
-html_theme_options = {
-  'accent_color': 'red'
-}
+html_theme_options = { 'accent_color': 'red', }
 html_title = project
 html_short_title = project
-html_show_sourcelink = False
+html_show_sourcelink = True
 html_show_sphinx = False
 html_show_copyright = True
 
