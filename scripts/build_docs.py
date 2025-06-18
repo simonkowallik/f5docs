@@ -83,8 +83,13 @@ class DocumentationBuilder:
         # URL to remove, ensure it's properly escaped for regex if needed,
         # though for a simple string replacement, direct replacement is fine.
         # For more complex patterns, re.sub would be better.
-        url_to_remove = "https://clouddocs.f5.com/training/community/rseries-training/html/"
-        return content.replace(url_to_remove, "")
+        urls_to_remove = [
+            "https://clouddocs.f5.com/training/community/rseries-training/html/".
+            "https://clouddocs.f5.com/training/community/velos-training/html/",
+        ]
+        for url_to_remove in urls_to_remove:
+            content = content.replace(url_to_remove, "")
+        return content
 
     def process_sphinx_docs(self, doc_path: Path, repo_name: str) -> Path:
         """Process Sphinx documentation and return processed path"""
