@@ -84,7 +84,7 @@ class DocumentationBuilder:
         # though for a simple string replacement, direct replacement is fine.
         # For more complex patterns, re.sub would be better.
         urls_to_remove = [
-            "https://clouddocs.f5.com/training/community/rseries-training/html/".
+            "https://clouddocs.f5.com/training/community/rseries-training/html/",
             "https://clouddocs.f5.com/training/community/velos-training/html/",
         ]
         for url_to_remove in urls_to_remove:
