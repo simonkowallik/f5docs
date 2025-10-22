@@ -7,6 +7,10 @@ repos:
     url: https://github.com/f5devcentral/f5-velos-training.git
     type: sphinx
     dir: docs
+  - name: f5xc-solutions
+    url: https://github.com/f5devcentral/f5xc-solutions.git
+    type: sphinx
+    dir: docs
   - name: k8s-bigip-ctlr
     url: https://github.com/F5Networks/k8s-bigip-ctlr.git
     type: sphinx
