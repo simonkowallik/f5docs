@@ -11,6 +11,10 @@ repos:
     url: https://github.com/f5devcentral/f5xc-solutions.git
     type: sphinx
     dir: docs
+  - name: f5xc-emea-workshop
+    url: https://github.com/f5devcentral/f5xc-emea-workshop.git
+    type: sphinx
+    dir: docs
   - name: k8s-bigip-ctlr
     url: https://github.com/F5Networks/k8s-bigip-ctlr.git
     type: sphinx
@@ -23,10 +27,10 @@ repos:
     url: https://github.com/F5Networks/f5-declarative-onboarding.git
     type: sphinx
     dir: docs
-  - name: f5-agility-labs-sslviz
-    url: https://github.com/f5devcentral/f5-agility-labs-sslviz.git
-    type: sphinx
-    dir: docs
+#  - name: f5-agility-labs-sslviz
+#    url: https://github.com/f5devcentral/f5-agility-labs-sslviz.git
+#    type: sphinx
+#    dir: docs
 
 
 
